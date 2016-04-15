@@ -3,10 +3,11 @@
 namespace SimpleThings\FormExtraBundle\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FieldTypeHelpExtension extends AbstractTypeExtension
 {
@@ -28,11 +29,8 @@ class FieldTypeHelpExtension extends AbstractTypeExtension
     {
         $view->vars['help'] = $options['help'];
     }
-
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'help' => null,
@@ -44,6 +42,6 @@ class FieldTypeHelpExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'form';
+        return 'Symfony\Component\Form\Extension\Core\Type\FormType';
     }
 }
