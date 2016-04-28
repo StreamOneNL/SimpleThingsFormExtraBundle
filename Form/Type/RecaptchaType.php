@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use SimpleThings\FormExtraBundle\Service\Recaptcha;
 use SimpleThings\FormExtraBundle\Form\DataTransformer\RecaptchaTransformer;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -85,15 +86,8 @@ class RecaptchaType extends AbstractType
         $view->vars['public_key'] = $this->publicKey;
         $view->vars['widget_options'] = $options['widget_options'];
     }
-
-    /**
-     * Options for this type
-     *
-     * @param  array $options
-     *
-     * @return array
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'required'        => true,
@@ -111,15 +105,5 @@ class RecaptchaType extends AbstractType
     public function getParent()
     {
         return 'form';
-    }
-
-    /**
-     * Used to identify the rendering block
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'formextra_recaptcha';
     }
 }
