@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\HttpFoundation\File\File;
 use SimpleThings\FormExtraBundle\Form\DataTransformer\FileSetTransformer;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Extends the File type not to handle a single file, but allowing to incrementally add one more file to a set.
@@ -53,18 +53,13 @@ class FileSetType extends AbstractType
         $view->vars['delete_route'] = $options['delete_route'];
         $view->vars['delete_id'] = $options['delete_id'];
     }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'delete_route' => false,
             'delete_id' => false,
         ));
-    }
-
-    public function getName()
-    {
-        return 'formextra_fileset';
     }
 
     public function getParent()

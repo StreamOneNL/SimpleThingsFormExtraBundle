@@ -24,7 +24,7 @@ class ImageFormTypeTest extends TypeTestCase
 
     public function testNameAndParent()
     {
-        $this->assertEquals('formextra_image', $this->type->getName());
+        $this->assertEquals('SimpleThings\FormExtraBundle\Form\Type\ImageType', $this->type->getName());
         $this->assertEquals('file', $this->type->getParent(array()));
     }
 

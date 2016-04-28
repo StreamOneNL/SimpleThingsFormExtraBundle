@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Extends the File type, upload an image but show a version of the currently uploaded image.
@@ -75,15 +75,8 @@ class ImageType extends AbstractType
         $view->vars['image_height'] = $options['image_height'];
         $view->vars['image_width'] = $options['image_width'];
     }
-
-    /**
-     * Options for this type
-     *
-     * @param  array $options
-     *
-     * @return array
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'base_path'                 => false,
@@ -95,6 +88,7 @@ class ImageType extends AbstractType
             'type'                      => 'file',
         ));
     }
+    
 
     /**
      * Inherits from file type and adds displaying capabilities.
@@ -106,15 +100,5 @@ class ImageType extends AbstractType
     public function getParent()
     {
         return 'file';
-    }
-
-    /**
-     * Used to identify the rendering block
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'formextra_image';
     }
 }
